@@ -4,11 +4,10 @@ Feature: Create a new course
   I want to create a new course
 
   Scenario: A valid non existing course
-    Given I send a PUT request to "/courses/ef8ac118-8d7f-49cc-abec-78e0d05af80a" with body:
+    Given I send a PUT request to "/order/ef8ac118-8d7f-49cc-abec-78e0d05af80a" with body:
     """
     {
-      "name": "The best course",
-      "duration": "5 hours"
+      "amount": 1450
     }
     """
     Then the response status code should be 201

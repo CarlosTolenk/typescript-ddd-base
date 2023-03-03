@@ -1,16 +1,16 @@
-import { Course } from '../domain/Course';
-import { CourseRepository } from '../domain/CourseRepository';
+import { Order } from '../domain/Order';
+import { OrderRepository } from '../domain/OrderRepository';
 
-export class CourseCreator {
-	private readonly repository: CourseRepository;
+export class OrderCreator {
+  private readonly repository: OrderRepository;
 
-	constructor(repository: CourseRepository) {
-		this.repository = repository;
-	}
+  constructor(repository: OrderRepository) {
+    this.repository = repository;
+  }
 
-	async run(id: string, name: string, duration: string): Promise<void> {
-		const course = new Course({ id, name, duration });
+  async run(id: string, amount: number): Promise<void> {
+    const course = new Order({ id, amount });
 
-		return this.repository.save(course);
-	}
+    return this.repository.save(course);
+  }
 }

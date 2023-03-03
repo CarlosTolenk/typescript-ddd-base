@@ -1,9 +1,12 @@
 services:
-
-  Apps.mooc.controllers.StatusGetController:
-    class: ../../controllers/StatusGetController
+  App.controllers.health.StatusLivenessController:
+    class: ../../controllers/health/StatusLivenessController
     arguments: []
 
-  Apps.mooc.controllers.CoursePutController:
-    class: ../../controllers/CoursePutController
-    arguments: [""]
+  App.controllers.health.StatusReadinessController:
+    class: ../../controllers/health/StatusReadinessController
+    arguments: []
+
+  App.controllers.order.OrderPutController:
+    class: ../../controllers/order/OrderPutController
+    arguments: ['']

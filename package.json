@@ -3,29 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "repository": {
-    "url": "https://github.com/CodelyTV/typescript-ddd-skeleton"
+    "url": "https://github.com/CarlosTolenk/typescript-ddd-base.git"
   },
   "license": "",
   "engines": {
-    "node": ">=14.0.0",
+    "node": ">=16.0.0",
     "npm": ">=6.14.0"
   },
   "scripts": {
-    "dev:mooc:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules  ./src/apps/mooc/backend/start.ts",
+    "dev:mooc:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules  src/app/backend/start.ts",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run test:unit && npm run test:features",
     "test:unit": "NODE_ENV=test jest",
-    "start:mooc:backend": "NODE_ENV=production node dist/src/apps/mooc/backend/start",
+    "start:mooc:backend": "NODE_ENV=production node dist/src/app/backend/start",
     "test:features": "npm run test:mooc:backend:features",
-    "test:mooc:backend:features": "NODE_ENV=test cucumber-js -p mooc_backend",
+    "test:mooc:backend:features": "NODE_ENV=test cucumber-js -p backend",
     "build": "npm run build:clean && npm run build:tsc && npm run build:di",
     "build:tsc": "tsc -p tsconfig.prod.json",
     "build:di": "copy 'src/**/*.{json,yaml,html,png}' dist/src",
     "build:clean": "rm -r dist; exit 0"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.2",
     "bodybuilder": "^2.4.0",
     "bson": "^4.5.2",
     "compression": "^1.7.4",

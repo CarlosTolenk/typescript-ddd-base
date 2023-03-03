@@ -1,11 +1,9 @@
-export class Course {
-	readonly id: string;
-	readonly name: string;
-	readonly duration: string;
+export class Order {
+  readonly id: string;
+  readonly amount: number;
 
-	constructor({ id, name, duration }: { id: string; name: string; duration: string }) {
-		this.id = id;
-		this.name = name;
-		this.duration = duration;
-	}
+  constructor({ id, amount }: { id: string; amount: number }) {
+    this.id = id;
+    this.amount = amount;
+  }
 }

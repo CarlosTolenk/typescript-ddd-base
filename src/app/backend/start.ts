@@ -1,7 +1,7 @@
-import { MoocBackendApp } from './MoocBackendApp';
+import { BackendApp } from './BackendApp';
 
 try {
-	new MoocBackendApp().start();
+	new BackendApp().start();
 } catch (e) {
 	console.log(e);
 	process.exit(1);

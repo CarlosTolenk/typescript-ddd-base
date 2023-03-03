@@ -3,8 +3,8 @@ import httpStatus from 'http-status';
 
 import { Controller } from '../Controller';
 
-export default class StatusLivenessController implements Controller {
+export default class StatusReadinessController implements Controller {
   run(req: Request, res: Response): void {
-    res.status(httpStatus.OK).send({ status: 'OK' });
+    res.status(httpStatus.OK).send({ status: 'OK Readiness' });
   }
 }

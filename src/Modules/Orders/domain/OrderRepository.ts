@@ -1,5 +1,5 @@
-import { Course } from './Course';
+import { Order } from './Order';
 
-export interface CourseRepository {
-	save(course: Course): Promise<void>;
+export interface OrderRepository {
+	save(course: Order): Promise<void>;
 }
