@@ -7,6 +7,7 @@ Feature: Create a new order
     Given I send a PUT request to "/order/ef8ac118-8d7f-49cc-abec-78e0d05af80a" with body:
     """
     {
+      "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
       "amount": 1450
     }
     """

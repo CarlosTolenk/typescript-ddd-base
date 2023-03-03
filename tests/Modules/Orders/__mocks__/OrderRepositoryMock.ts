@@ -2,16 +2,17 @@ import { Order } from '../../../../src/Modules/Orders/domain/Order';
 import { OrderRepository } from '../../../../src/Modules/Orders/domain/OrderRepository';
 
 export class OrderRepositoryMock implements OrderRepository {
-	private readonly mockSave = jest.fn();
+  private readonly saveMock: jest.Mock;
 
-	async save(order: Order): Promise<void> {
-		await this.mockSave(order);
-	}
+  constructor() {
+    this.saveMock = jest.fn();
+  }
 
-	assertLastSavedOrderIs(expected: Order): void {
-		const mock = this.mockSave.mock;
-		const lastSavedOrder = (mock.calls[mock.calls.length - 1] as Order[])[0];
-		expect(lastSavedOrder).toBeInstanceOf(Order);
-		expect(lastSavedOrder.id).toEqual(expected.id);
-	}
+  async save(order: Order): Promise<void> {
+    this.saveMock(order);
+  }
+
+  assertSaveHaveBeenCalledWith(expected: Order): void {
+    expect(this.saveMock).toHaveBeenCalledWith(expected);
+  }
 }

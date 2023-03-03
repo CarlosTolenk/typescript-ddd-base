@@ -11,7 +11,7 @@ beforeEach(() => {
 });
 
 describe('OrderCreator', () => {
-	it('should create a valid course', async () => {
+	it('should create a valid order', async () => {
 		const id = 'some-id';
 		const amount = 1520;
 
@@ -19,6 +19,6 @@ describe('OrderCreator', () => {
 
 		await creator.run(id, amount);
 
-		repository.assertLastSavedOrderIs(order);
+		repository.assertSaveHaveBeenCalledWith(order);
 	});
 });
