@@ -6,19 +6,19 @@ let repository: OrderRepositoryMock;
 let creator: OrderCreator;
 
 beforeEach(() => {
-  repository = new OrderRepositoryMock();
-  creator = new OrderCreator(repository);
+	repository = new OrderRepositoryMock();
+	creator = new OrderCreator(repository);
 });
 
 describe('OrderCreator', () => {
-  it('should create a valid course', async () => {
-    const id = 'some-id';
-    const amount = 1520;
+	it('should create a valid course', async () => {
+		const id = 'some-id';
+		const amount = 1520;
 
-    const order = new Order({ id, amount });
+		const order = new Order({ id, amount });
 
-    await creator.run(id, amount);
+		await creator.run(id, amount);
 
-    repository.assertLastSavedOrderIs(order);
-  });
+		repository.assertLastSavedOrderIs(order);
+	});
 });

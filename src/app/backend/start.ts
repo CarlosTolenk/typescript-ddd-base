@@ -2,12 +2,12 @@ import { BackendApp } from './BackendApp';
 
 try {
 	new BackendApp().start();
-} catch (e) {
-	console.log(e);
+} catch (error) {
+	console.log(error);
 	process.exit(1);
 }
 
-process.on('uncaughtException', err => {
-	console.log('uncaughtException', err);
+process.on('uncaughtException', error => {
+	console.log('uncaughtException', error);
 	process.exit(1);
 });
