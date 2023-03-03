@@ -9,4 +9,4 @@ services:
 
   App.controllers.order.OrderPutController:
     class: ../../controllers/order/OrderPutController
-    arguments: ['']
+    arguments: ['@Modules.Orders.application.OrderCreator']

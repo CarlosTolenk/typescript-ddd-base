@@ -1,7 +1,7 @@
-Feature: Create a new course
-  In order to have courses in the platform
+Feature: Create a new order
+  In order to have order in the platform
   As a user with admin permissions
-  I want to create a new course
+  I want to create a new order
 
   Scenario: A valid non existing course
     Given I send a PUT request to "/order/ef8ac118-8d7f-49cc-abec-78e0d05af80a" with body:
