@@ -1,5 +1,6 @@
 import { Order } from '../domain/Order';
 import { OrderRepository } from '../domain/OrderRepository';
+import { CreateOrderRequest } from './CreateOrderRequest';
 
 export class OrderCreator {
   private readonly repository: OrderRepository;
@@ -8,8 +9,8 @@ export class OrderCreator {
     this.repository = repository;
   }
 
-  async run(id: string, amount: number): Promise<void> {
-    const course = new Order({ id, amount });
+  async run(request: CreateOrderRequest): Promise<void> {
+    const course = new Order({ id: request.id, amount: request.amount });
 
     return this.repository.save(course);
   }

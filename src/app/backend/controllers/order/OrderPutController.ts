@@ -20,7 +20,7 @@ export class OrderPutController implements Controller {
   async run(req: OrderPutRequest, res: Response): Promise<void> {
     try {
       const { id, amount } = req.body;
-      await this.orderCreator.run(id, amount);
+      await this.orderCreator.run({ id, amount });
       res.status(httpStatus.CREATED).send();
     } catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
