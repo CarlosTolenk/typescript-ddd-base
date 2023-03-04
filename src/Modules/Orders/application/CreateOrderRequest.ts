@@ -1,4 +1,4 @@
 export interface CreateOrderRequest {
-  id: string;
-  amount: number;
+	id: string;
+	amount: number;
 }
