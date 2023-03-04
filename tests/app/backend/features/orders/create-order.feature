@@ -8,7 +8,8 @@ Feature: Create a new order
     """
     {
       "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
-      "amount": 1450
+      "amount": 1450,
+      "description": "the description order"
     }
     """
     Then the response status code should be 201
