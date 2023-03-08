@@ -1,2 +1,8 @@
 imports:
   - { resource: ./application.yaml }
+  - { resource: ./Orders/application.yaml }
+
+services:
+  Shared.EnvironmentArranger:
+    class: ../../../../tests/Modules/Shared/infrastructure/persistence/mongo/MongoEnvironmentArranger
+    arguments: ['@Shared.ConnectionManager']

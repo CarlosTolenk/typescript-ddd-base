@@ -1,8 +1,19 @@
 services:
+  Shared.MongoConfig:
+    factory:
+      class: ../../../../Modules/Shared/infrastructure/persistence/mongo/MongoConfigFactory
+      method: 'createConfig'
+
+  Shared.ConnectionManager:
+    factory:
+      class: ../../../../Modules/Shared/infrastructure/persistence/mongo/MongoClientFactory
+      method: 'createClient'
+    arguments: ['app', '@Shared.MongoConfig']
+
+  Modules.Orders.domain.OrderRepository:
+    class: ../../../../Modules/Orders/infrastructure/persistence/MongoOrderRepository
+    arguments: ['@Shared.ConnectionManager']
+
   Modules.Orders.application.OrderCreator:
     class: ../../../../Modules/Orders/application/OrderCreator
     arguments: ['@Modules.Orders.domain.OrderRepository']
-
-  Modules.Orders.domain.OrderRepository:
-    class: ../../../../Modules/Orders/infrastructure/persistence/FileOrderRepository
-    arguments: ['']
