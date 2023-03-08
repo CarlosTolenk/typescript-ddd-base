@@ -16,4 +16,4 @@ services:
 
   Modules.Orders.application.OrderCreator:
     class: ../../../../Modules/Orders/application/OrderCreator
-    arguments: ['@Modules.Orders.domain.OrderRepository']
+    arguments: ['@Modules.Orders.domain.OrderRepository', '@Shared.domain.EventBus']

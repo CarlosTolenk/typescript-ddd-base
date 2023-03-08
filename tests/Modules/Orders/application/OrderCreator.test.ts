@@ -6,23 +6,29 @@ import { OrderDescriptionLengthExceeded } from '../../../../src/Modules/Orders/d
 import { OrderAmountNotZero } from '../../../../src/Modules/Orders/domain/exceptions/OrderAmountNotZero';
 import { CreateOrderRequestMother } from './CreateOrderRequestMother';
 import { OrderMother } from '../domain/OrderMother';
+import EventBusMock from '../__mocks__/EventBusMock';
+import { OrderCreatedDomainEventMother } from '../domain/OrderCreatedDomainEventMother';
 
 let repository: OrderRepositoryMock;
 let creator: OrderCreator;
+let eventBus: EventBusMock;
 
 beforeEach(() => {
   repository = new OrderRepositoryMock();
-  creator = new OrderCreator(repository);
+  eventBus = new EventBusMock();
+  creator = new OrderCreator(repository, eventBus);
 });
 
 describe('OrderCreator', () => {
   it('should create a valid order', async () => {
     const request = CreateOrderRequestMother.random();
     const order = OrderMother.fromRequest(request);
+    const domainEvent = OrderCreatedDomainEventMother.fromOrder(order);
 
     await creator.run(request);
 
     repository.assertSaveHaveBeenCalledWith(order);
+    eventBus.assertLastPublishedEventIs(domainEvent);
   });
 
   it('should throw error if order description length is exceeded', () => {

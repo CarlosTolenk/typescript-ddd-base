@@ -2,6 +2,7 @@ import { OrderId } from './value-object/OrderId';
 import { OrderAmount } from './value-object/OrderAmount';
 import { OrderDescription } from './value-object/OrderDescription';
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
+import { OrderCreatedDomainEvent } from './OrderCreatedDomainEvent';
 
 export class Order extends AggregateRoot {
   readonly id: OrderId;
@@ -13,6 +14,20 @@ export class Order extends AggregateRoot {
     this.id = id;
     this.amount = amount;
     this.description = description;
+  }
+
+  static create(id: OrderId, description: OrderDescription, amount: OrderAmount): Order {
+    const order = new Order({ id, description, amount });
+
+    order.record(
+      new OrderCreatedDomainEvent({
+        id: order.id.value,
+        description: order.description.value,
+        amount: order.amount.value
+      })
+    );
+
+    return order;
   }
 
   static fromPrimitives(plainData: { id: string; amount: number; description: string }): Order {
