@@ -1,0 +1,4 @@
+services:
+  Shared.domain.EventBus:
+    class: ../../../../Modules/Shared/infrastructure/eventBus/inMemory/InMemoryAsyncEventBus
+    arguments: []
