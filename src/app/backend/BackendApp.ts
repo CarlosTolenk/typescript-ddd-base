@@ -24,6 +24,10 @@ export class BackendApp {
     return this.server?.getHTTPServer();
   }
 
+  async stop(): Promise<void> {
+    return this.server?.stop();
+  }
+
   private async configureEventBus() {
     const eventBus = container.get<EventBus>('Shared.domain.EventBus');
 
@@ -40,9 +44,5 @@ export class BackendApp {
     });
 
     return subscribers;
-  }
-
-  async stop(): Promise<void> {
-    return this.server?.stop();
   }
 }
