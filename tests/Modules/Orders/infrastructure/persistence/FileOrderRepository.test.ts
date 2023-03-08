@@ -7,17 +7,17 @@ import { OrderAmount } from '../../../../../src/Modules/Orders/domain/value-obje
 import { OrderDescription } from '../../../../../src/Modules/Orders/domain/value-object/OrderDescription';
 
 describe('FileOrderRepository', () => {
-  it('should save a course', async () => {
+  it('should save a order', async () => {
     const repository = new FileOrderRepository();
-    const expectedCourse = new Order({
+    const expectedOrder = new Order({
       id: new OrderId('0766c602-d4d4-48b6-9d50-d3253123275e'),
       amount: new OrderAmount(1545),
       description: new OrderDescription('The order description')
     });
 
-    await repository.save(expectedCourse);
+    await repository.save(expectedOrder);
 
-    const course = await repository.search('0766c602-d4d4-48b6-9d50-d3253123275e');
-    expect(course).toEqual(expectedCourse);
+    const order = await repository.search('0766c602-d4d4-48b6-9d50-d3253123275e');
+    expect(order).toEqual(expectedOrder);
   });
 });

@@ -3,7 +3,7 @@ Feature: Create a new order
   As a user with admin permissions
   I want to create a new order
 
-  Scenario: A valid non existing course
+  Scenario: A valid non existing order
     Given I send a PUT request to "/order/ef8ac118-8d7f-49cc-abec-78e0d05af80a" with body:
     """
     {

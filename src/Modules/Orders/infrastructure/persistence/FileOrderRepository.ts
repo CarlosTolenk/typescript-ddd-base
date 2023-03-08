@@ -10,9 +10,9 @@ export class FileOrderRepository implements OrderRepository {
     return fs.promises.writeFile(this.filePath(order.id.value), serialize(order));
   }
 
-  async search(courseId: string): Promise<Order> {
-    const courseData = await fs.promises.readFile(this.filePath(courseId));
-    const { id, amount, description } = deserialize(courseData);
+  async search(orderId: string): Promise<Order> {
+    const orderData = await fs.promises.readFile(this.filePath(orderId));
+    const { id, amount, description } = deserialize(orderData);
 
     return new Order({ id, amount, description });
   }
