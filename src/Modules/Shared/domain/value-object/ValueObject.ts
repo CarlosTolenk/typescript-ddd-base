@@ -5,7 +5,7 @@ type Primitives = String | string | number | Boolean | boolean | Date;
 export abstract class ValueObject<T extends Primitives> {
   readonly value: T;
 
-  protected constructor(value: T) {
+  public constructor(value: T) {
     this.value = value;
     this.ensureValueIsDefined(value);
   }

@@ -9,7 +9,14 @@ export class OrderAmount extends NumberValueObject {
 
   private ensureAmountLess0Amount(value: number): void {
     if (value <= 0) {
-      throw new OrderAmountNotZero('The order cannot have an amount of zero');
+      throw new OrderAmountNotZero(
+        'The order cannot have an amount of zero',
+        400,
+        'ValueObject',
+        this.constructor.name,
+        'ensureAmountLess0Amount',
+        1000
+      );
     }
   }
 }

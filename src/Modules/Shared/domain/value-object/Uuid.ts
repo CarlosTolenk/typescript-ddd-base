@@ -5,7 +5,7 @@ import { InvalidArgumentError } from '../expcetion/InvalidArgumentError';
 import { ValueObject } from './ValueObject';
 
 export class Uuid extends ValueObject<string> {
-  protected constructor(value: string) {
+  public constructor(value: string) {
     super(value);
     this.ensureIsValidUuid(value);
   }

@@ -1,3 +1,3 @@
-import { InvalidArgumentError } from '../../../Shared/domain/expcetion/InvalidArgumentError';
+import { HttpErrorBase } from '../../../Shared/domain/expcetion/HttpError';
 
-export class OrderDescriptionLengthExceeded extends InvalidArgumentError {}
+export class OrderDescriptionLengthExceeded extends HttpErrorBase {}
