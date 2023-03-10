@@ -1,3 +1,5 @@
+import httpStatus from 'http-status';
+
 import { NumberValueObject } from '../../../Shared/domain/value-object/NumberValueObject';
 import { OrderAmountNotZero } from '../exceptions/OrderAmountNotZero';
 
@@ -11,7 +13,7 @@ export class OrderAmount extends NumberValueObject {
     if (value <= 0) {
       throw new OrderAmountNotZero(
         'The order cannot have an amount of zero',
-        400,
+        httpStatus.BAD_REQUEST,
         'ValueObject',
         this.constructor.name,
         'ensureAmountLess0Amount',

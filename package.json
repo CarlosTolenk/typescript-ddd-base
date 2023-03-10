@@ -25,6 +25,7 @@
     "build:clean": "rm -r dist; exit 0"
   },
   "dependencies": {
+    "amqplib": "^0.10.3",
     "body-parser": "^1.20.2",
     "bodybuilder": "^2.4.0",
     "bson": "^4.5.2",
@@ -51,6 +52,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.1",
     "@types/bson": "^4.0.5",
     "@types/compression": "^1.7.2",
     "@types/connect-flash": "0.0.37",
