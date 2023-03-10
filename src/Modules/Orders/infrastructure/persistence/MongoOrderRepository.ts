@@ -6,8 +6,8 @@ import { MongoRepository } from '../../../Shared/infrastructure/persistence/mong
 
 interface OrderDocument {
   _id: string;
-  name: string;
-  duration: string;
+  amount: number;
+  description: string;
 }
 
 export class MongoOrderRepository extends MongoRepository<Order> implements OrderRepository {
