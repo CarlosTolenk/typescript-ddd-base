@@ -1,8 +1,8 @@
-export abstract class NumberValueObject {
-  readonly value: number;
+import { ValueObject } from './ValueObject';
 
-  constructor(value: number) {
-    this.value = value;
+export abstract class NumberValueObject extends ValueObject<number> {
+  protected constructor(value: number) {
+    super(value);
   }
 
   equalsTo(other: NumberValueObject): boolean {
