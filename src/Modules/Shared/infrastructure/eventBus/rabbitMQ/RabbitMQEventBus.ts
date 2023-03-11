@@ -1,11 +1,11 @@
 import { DomainEvent } from '../../../domain/DomainEvent';
 import { EventBus } from '../../../domain/EventBus';
-import { RabbitMQConnection } from './RabbitMqConnection';
 import { DomainEventSubscribers } from '../DomainEventSubscribers';
+import { RabbitMQConnection } from './RabbitMqConnection';
 
 export class RabbitMQEventBus implements EventBus {
-  private connection: RabbitMQConnection;
-  private exchange: string;
+  private readonly connection: RabbitMQConnection;
+  private readonly exchange: string;
 
   constructor(params: { connection: RabbitMQConnection }) {
     this.connection = params.connection;

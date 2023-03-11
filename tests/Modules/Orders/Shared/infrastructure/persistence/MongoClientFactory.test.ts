@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+
 import { MongoClientFactory } from '../../../../../../src/Modules/Shared/infrastructure/persistence/mongo/MongoClientFactory';
 
 describe('MongoClientFactory', () => {
@@ -18,7 +19,9 @@ describe('MongoClientFactory', () => {
   });
 
   it('creates a new client if it does not exist a client with the given name', async () => {
-    const newClient = await factory.createClient('test2', { url: 'mongodb://localhost:27017/backend-test2' });
+    const newClient = await factory.createClient('test2', {
+      url: 'mongodb://localhost:27017/backend-test2'
+    });
 
     expect(newClient).not.toBe(client);
 
@@ -26,7 +29,9 @@ describe('MongoClientFactory', () => {
   });
 
   it('returns a client if it already exists', async () => {
-    const newClient = await factory.createClient('test', { url: 'mongodb://localhost:27017/backend-test3' });
+    const newClient = await factory.createClient('test', {
+      url: 'mongodb://localhost:27017/backend-test3'
+    });
 
     expect(newClient).toBe(client);
 

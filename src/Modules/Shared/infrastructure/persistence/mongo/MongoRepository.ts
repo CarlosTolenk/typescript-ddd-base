@@ -1,12 +1,13 @@
 import { Collection, MongoClient } from 'mongodb';
+
 import { AggregateRoot } from '../../../domain/AggregateRoot';
 
 export abstract class MongoRepository<T extends AggregateRoot> {
-  protected constructor(private _client: Promise<MongoClient>) {}
+  protected constructor(private readonly _client: Promise<MongoClient>) {}
 
   protected abstract collectionName(): string;
 
-  protected client(): Promise<MongoClient> {
+  protected async client(): Promise<MongoClient> {
     return this._client;
   }
 

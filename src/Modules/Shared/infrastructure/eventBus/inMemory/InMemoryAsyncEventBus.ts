@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+
 import { DomainEvent } from '../../../domain/DomainEvent';
 import { DomainEventSubscriber } from '../../../domain/DomainEventSubscriber';
 import { EventBus } from '../../../domain/EventBus';

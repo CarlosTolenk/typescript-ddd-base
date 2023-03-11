@@ -14,7 +14,7 @@ interface HttpProblem extends HttpError {
 
 export class HttpErrorBase extends Error implements HttpProblem {
   type: Nullable<string> = null;
-  httpStatus: number = 500;
+  httpStatus = 500;
   detail: Nullable<string> = null;
   instance: Nullable<string> = null;
   businessCode: number;

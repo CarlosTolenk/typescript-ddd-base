@@ -1,8 +1,9 @@
 import { MongoClient } from 'mongodb';
+
 import { EnvironmentArranger } from '../../arranger/EnvironmentArranger';
 
 export class MongoEnvironmentArranger extends EnvironmentArranger {
-  constructor(private _client: Promise<MongoClient>) {
+  constructor(private readonly _client: Promise<MongoClient>) {
     super();
   }
 
@@ -26,7 +27,7 @@ export class MongoEnvironmentArranger extends EnvironmentArranger {
     return collections.map(collection => collection.name);
   }
 
-  protected client(): Promise<MongoClient> {
+  protected async client(): Promise<MongoClient> {
     return this._client;
   }
 

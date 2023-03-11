@@ -1,12 +1,11 @@
 import { Definition } from 'node-dependency-injection';
 
+import { DomainEvent } from '../../Modules/Shared/domain/DomainEvent';
+import { DomainEventSubscriber } from '../../Modules/Shared/domain/DomainEventSubscriber';
 // Domain
 import { EventBus } from '../../Modules/Shared/domain/EventBus';
-import { DomainEventSubscriber } from '../../Modules/Shared/domain/DomainEventSubscriber';
-import { DomainEvent } from '../../Modules/Shared/domain/DomainEvent';
-
-import { Server } from './server';
 import container from './dependency-injection';
+import { Server } from './server';
 
 export class BackendApp {
   server?: Server;
@@ -35,10 +34,10 @@ export class BackendApp {
   }
 
   private findSubscribers(): Array<DomainEventSubscriber<DomainEvent>> {
-    const subscriberDefinitions = container.findTaggedServiceIds('domainEventSubscriber') as Map<String, Definition>;
+    const subscriberDefinitions = container.findTaggedServiceIds('domainEventSubscriber') as Map<string, Definition>;
     const subscribers: Array<DomainEventSubscriber<DomainEvent>> = [];
 
-    subscriberDefinitions.forEach((value: Definition, key: String) => {
+    subscriberDefinitions.forEach((value: Definition, key: string) => {
       const domainEventSubscriber = container.get<DomainEventSubscriber<DomainEvent>>(key.toString());
       subscribers.push(domainEventSubscriber);
     });

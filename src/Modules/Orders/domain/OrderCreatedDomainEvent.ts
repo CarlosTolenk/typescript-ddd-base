@@ -4,7 +4,6 @@ type CreateOrderDomainEventAttributes = {
   readonly description: string;
   readonly amount: number;
   readonly eventName: string;
-  readonly id: string;
 };
 
 export class OrderCreatedDomainEvent extends DomainEvent {
@@ -14,42 +13,43 @@ export class OrderCreatedDomainEvent extends DomainEvent {
   readonly amount: number;
 
   constructor({
-    id,
+    aggregateId,
     description,
     amount,
     eventId,
     occurredOn
   }: {
-    id: string;
+    aggregateId: string;
     eventId?: string;
     description: string;
     amount: number;
     occurredOn?: Date;
   }) {
-    super({ eventName: OrderCreatedDomainEvent.EVENT_NAME, aggregateId: id, eventId, occurredOn });
+    super({ eventName: OrderCreatedDomainEvent.EVENT_NAME, aggregateId, eventId, occurredOn });
     this.description = description;
     this.amount = amount;
   }
 
   toPrimitives(): CreateOrderDomainEventAttributes {
-    const { description, amount, aggregateId } = this;
+    const { description, amount } = this;
+
     return {
       description,
       amount,
-      eventName: OrderCreatedDomainEvent.EVENT_NAME,
-      id: aggregateId
+      eventName: OrderCreatedDomainEvent.EVENT_NAME
     };
   }
 
   static fromPrimitives(params: {
-    id: string;
+    aggregateId: string;
     attributes: CreateOrderDomainEventAttributes;
     eventId: string;
     occurredOn: Date;
   }): DomainEvent {
-    const { id, attributes, occurredOn, eventId } = params;
+    const { aggregateId, attributes, occurredOn, eventId } = params;
+
     return new OrderCreatedDomainEvent({
-      id,
+      aggregateId,
       description: attributes.description,
       amount: attributes.amount,
       eventId,

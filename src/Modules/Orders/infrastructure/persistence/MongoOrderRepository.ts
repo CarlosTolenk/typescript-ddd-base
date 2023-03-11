@@ -1,8 +1,8 @@
 import { Nullable } from '../../../Shared/domain/Nullable';
+import { MongoRepository } from '../../../Shared/infrastructure/persistence/mongo/MongoRepository';
 import { Order } from '../../domain/Order';
 import { OrderRepository } from '../../domain/OrderRepository';
 import { OrderId } from '../../domain/value-object/OrderId';
-import { MongoRepository } from '../../../Shared/infrastructure/persistence/mongo/MongoRepository';
 
 interface OrderDocument {
   _id: string;
@@ -11,7 +11,7 @@ interface OrderDocument {
 }
 
 export class MongoOrderRepository extends MongoRepository<Order> implements OrderRepository {
-  public save(order: Order): Promise<void> {
+  public async save(order: Order): Promise<void> {
     return this.persist(order.id.value, order);
   }
 
@@ -21,7 +21,11 @@ export class MongoOrderRepository extends MongoRepository<Order> implements Orde
     const document = await collection.findOne<OrderDocument>({ _id: id.value });
 
     return document
-      ? Order.fromPrimitives({ amount: document.amount, description: document.description, id: id.value })
+      ? Order.fromPrimitives({
+          amount: document.amount,
+          description: document.description,
+          id: id.value
+        })
       : null;
   }
 

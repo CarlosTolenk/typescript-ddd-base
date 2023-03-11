@@ -1,10 +1,9 @@
 import { Order } from '../../../../../src/Modules/Orders/domain/Order';
-import { FileOrderRepository } from '../../../../../src/Modules/Orders/infrastructure/persistence/FileOrderRepository';
-
-// Value Object
-import { OrderId } from '../../../../../src/Modules/Orders/domain/value-object/OrderId';
 import { OrderAmount } from '../../../../../src/Modules/Orders/domain/value-object/OrderAmount';
 import { OrderDescription } from '../../../../../src/Modules/Orders/domain/value-object/OrderDescription';
+// Value Object
+import { OrderId } from '../../../../../src/Modules/Orders/domain/value-object/OrderId';
+import { FileOrderRepository } from '../../../../../src/Modules/Orders/infrastructure/persistence/FileOrderRepository';
 
 describe('FileOrderRepository', () => {
   it('should save a order', async () => {

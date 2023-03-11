@@ -1,9 +1,9 @@
-import { EventBus } from '../../../../src/Modules/Shared/domain/EventBus';
 import { DomainEvent } from '../../../../src/Modules/Shared/domain/DomainEvent';
 import { DomainEventSubscriber } from '../../../../src/Modules/Shared/domain/DomainEventSubscriber';
+import { EventBus } from '../../../../src/Modules/Shared/domain/EventBus';
 
 export default class EventBusMock implements EventBus {
-  private publishSpy = jest.fn();
+  private readonly publishSpy = jest.fn();
 
   async publish(events: DomainEvent[]) {
     this.publishSpy(events);

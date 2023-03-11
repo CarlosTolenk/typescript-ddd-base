@@ -1,4 +1,5 @@
 import amqplib from 'amqplib';
+
 import { ConnectionSettings } from './ConnectionSettings';
 import { ExchangeSetting } from './ExchangeSetting';
 
@@ -52,11 +53,13 @@ export class RabbitMQConnection {
     options: { messageId: string; contentType: string; contentEncoding: string };
   }): Promise<boolean> {
     const { routingKey, content, options, exchange } = params;
+
     return this.channel!.publish(exchange, routingKey, content, options);
   }
 
   async close(): Promise<void> {
     await this.channel?.close();
+
     return this.connection?.close();
   }
 }

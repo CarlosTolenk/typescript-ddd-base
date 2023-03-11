@@ -1,7 +1,7 @@
 import { Order } from '../../../../src/Modules/Orders/domain/Order';
 import { OrderCreatedDomainEvent } from '../../../../src/Modules/Orders/domain/OrderCreatedDomainEvent';
-import { OrderMother } from './OrderMother';
 import { CreateOrderRequestMother } from '../application/CreateOrderRequestMother';
+import { OrderMother } from './OrderMother';
 
 export class OrderCreatedDomainEventMother {
   static create({
@@ -29,6 +29,7 @@ export class OrderCreatedDomainEventMother {
   static random(): OrderCreatedDomainEvent {
     const request = CreateOrderRequestMother.random();
     const order = OrderMother.fromRequest(request);
+
     return OrderCreatedDomainEventMother.fromOrder(order);
   }
 

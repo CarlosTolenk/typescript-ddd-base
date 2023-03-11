@@ -1,13 +1,12 @@
 import { OrderCreator } from '../../../../src/Modules/Orders/application/OrderCreator';
-
+import { OrderAmountNotZero } from '../../../../src/Modules/Orders/domain/exceptions/OrderAmountNotZero';
+import { OrderDescriptionLengthExceeded } from '../../../../src/Modules/Orders/domain/exceptions/OrderDescriptionLengthExceeded';
+import EventBusMock from '../__mocks__/EventBusMock';
 // Mocks
 import { OrderRepositoryMock } from '../__mocks__/OrderRepositoryMock';
-import { OrderDescriptionLengthExceeded } from '../../../../src/Modules/Orders/domain/exceptions/OrderDescriptionLengthExceeded';
-import { OrderAmountNotZero } from '../../../../src/Modules/Orders/domain/exceptions/OrderAmountNotZero';
-import { CreateOrderRequestMother } from './CreateOrderRequestMother';
-import { OrderMother } from '../domain/OrderMother';
-import EventBusMock from '../__mocks__/EventBusMock';
 import { OrderCreatedDomainEventMother } from '../domain/OrderCreatedDomainEventMother';
+import { OrderMother } from '../domain/OrderMother';
+import { CreateOrderRequestMother } from './CreateOrderRequestMother';
 
 let repository: OrderRepositoryMock;
 let creator: OrderCreator;

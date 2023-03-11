@@ -1,12 +1,11 @@
+import { EventBus } from '../../Shared/domain/EventBus';
 import { Order } from '../domain/Order';
 import { OrderRepository } from '../domain/OrderRepository';
-import { CreateOrderRequest } from './CreateOrderRequest';
-
+import { OrderAmount } from '../domain/value-object/OrderAmount';
 // Value Object
 import { OrderDescription } from '../domain/value-object/OrderDescription';
-import { OrderAmount } from '../domain/value-object/OrderAmount';
 import { OrderId } from '../domain/value-object/OrderId';
-import { EventBus } from '../../Shared/domain/EventBus';
+import { CreateOrderRequest } from './CreateOrderRequest';
 
 export class OrderCreator {
   private readonly repository: OrderRepository;

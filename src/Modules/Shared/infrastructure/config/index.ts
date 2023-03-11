@@ -17,6 +17,6 @@ const configBasic = convict({
   }
 });
 
-configBasic.loadFile([__dirname + '/default.json', __dirname + '/' + configBasic.get('env') + '.json']);
+configBasic.loadFile([`${__dirname}/default.json`, `${__dirname}/${configBasic.get('env')}.json`]);
 
 export default configBasic;

@@ -1,8 +1,8 @@
-import { OrderId } from './value-object/OrderId';
-import { OrderAmount } from './value-object/OrderAmount';
-import { OrderDescription } from './value-object/OrderDescription';
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
 import { OrderCreatedDomainEvent } from './OrderCreatedDomainEvent';
+import { OrderAmount } from './value-object/OrderAmount';
+import { OrderDescription } from './value-object/OrderDescription';
+import { OrderId } from './value-object/OrderId';
 
 export class Order extends AggregateRoot {
   readonly id: OrderId;

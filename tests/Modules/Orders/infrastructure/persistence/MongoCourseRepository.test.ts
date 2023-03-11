@@ -1,5 +1,5 @@
-import { OrderRepository } from '../../../../../src/Modules/Orders/domain/OrderRepository';
 import container from '../../../../../src/app/backend/dependency-injection';
+import { OrderRepository } from '../../../../../src/Modules/Orders/domain/OrderRepository';
 import { EnvironmentArranger } from '../../../Shared/infrastructure/arranger/EnvironmentArranger';
 import { OrderMother } from '../../domain/OrderMother';
 

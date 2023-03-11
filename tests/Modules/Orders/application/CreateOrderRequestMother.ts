@@ -1,10 +1,10 @@
-import { OrderId } from '../../../../src/Modules/Orders/domain/value-object/OrderId';
+import { CreateOrderRequest } from '../../../../src/Modules/Orders/application/CreateOrderRequest';
 import { OrderAmount } from '../../../../src/Modules/Orders/domain/value-object/OrderAmount';
 import { OrderDescription } from '../../../../src/Modules/Orders/domain/value-object/OrderDescription';
-import { OrderIdMother } from '../domain/OrderIdMother';
+import { OrderId } from '../../../../src/Modules/Orders/domain/value-object/OrderId';
 import { OrderAmountMother } from '../domain/OrderAmountMother';
 import { OrderDescriptionMother } from '../domain/OrderDescriptionMother';
-import { CreateOrderRequest } from '../../../../src/Modules/Orders/application/CreateOrderRequest';
+import { OrderIdMother } from '../domain/OrderIdMother';
 
 export class CreateOrderRequestMother {
   static create(id: OrderId, amount: OrderAmount, description: OrderDescription): CreateOrderRequest {

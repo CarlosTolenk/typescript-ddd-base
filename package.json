@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev:backend": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules  src/app/backend/start.ts",
+    "prettier:fix": "prettier --write .",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "test": "npm run test:unit && npm run test:features",
