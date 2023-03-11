@@ -45,7 +45,21 @@ export class OrderStatistics extends AggregateRoot {
     );
   }
 
-  toPrimitives(data: { id: string; total: number; totalAmount: number; existingOrders: string[] }): OrderStatistics {
+  toPrimitives() {
+    return {
+      id: this.id.value,
+      total: this.total.value,
+      totalAmount: this.totalAmount.value,
+      existingOrders: this.existingOrders.map(orderId => orderId.value)
+    };
+  }
+
+  static fromPrimitives(data: {
+    id: string;
+    total: number;
+    totalAmount: number;
+    existingOrders: string[];
+  }): OrderStatistics {
     return new OrderStatistics(
       new OrderStatisticsId(data.id),
       new OrderStatisticsTotal(data.total),
