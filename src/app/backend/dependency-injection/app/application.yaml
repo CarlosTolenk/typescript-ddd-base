@@ -10,3 +10,7 @@ services:
   App.controllers.order.OrderPutController:
     class: ../../controllers/order/OrderPutController
     arguments: ['@Modules.Orders.application.OrderCreator']
+
+  App.controllers.orderStatistic.OrderStatisticGetController:
+    class: ../../controllers/orderStatistic/OrderStatisticGetController
+    arguments: ['@Modules.OrderStatistics.application.OrderStatisticFinder']

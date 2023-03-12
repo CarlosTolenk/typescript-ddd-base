@@ -54,6 +54,10 @@ export class OrderStatistics extends AggregateRoot {
     };
   }
 
+  static initialize(id: OrderStatisticsId): OrderStatistics {
+    return new OrderStatistics(id, OrderStatisticsTotal.initialize(), OrderStatisticsAmount.initialize());
+  }
+
   static fromPrimitives(data: {
     id: string;
     total: number;

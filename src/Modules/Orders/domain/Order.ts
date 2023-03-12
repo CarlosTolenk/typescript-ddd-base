@@ -21,7 +21,7 @@ export class Order extends AggregateRoot {
 
     order.record(
       new OrderCreatedDomainEvent({
-        id: order.id.value,
+        aggregateId: order.id.value,
         description: order.description.value,
         amount: order.amount.value
       })

@@ -1,10 +1,11 @@
+import express, { Request, Response } from 'express';
 import { json, urlencoded } from 'body-parser';
 import compress from 'compression';
 import errorHandler from 'errorhandler';
-import express from 'express';
 import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
+import httpStatus from 'http-status';
 
 import { registerRoutes } from './routes';
 
@@ -28,6 +29,11 @@ export class Server {
     this.express.use(router);
 
     registerRoutes(router);
+
+    router.use((err: Error, req: Request, res: Response, next: Function) => {
+      console.log(err);
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+    });
   }
 
   async listen(): Promise<void> {

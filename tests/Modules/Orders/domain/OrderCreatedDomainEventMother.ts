@@ -5,20 +5,20 @@ import { OrderMother } from './OrderMother';
 
 export class OrderCreatedDomainEventMother {
   static create({
-    id,
+    aggregateId,
     eventId,
     description,
     amount,
     occurredOn
   }: {
-    id: string;
+    aggregateId: string;
     eventId?: string;
     description: string;
     amount: number;
     occurredOn?: Date;
   }): OrderCreatedDomainEvent {
     return new OrderCreatedDomainEvent({
-      id,
+      aggregateId,
       eventId,
       description,
       amount,
@@ -35,7 +35,7 @@ export class OrderCreatedDomainEventMother {
 
   static fromOrder(order: Order): OrderCreatedDomainEvent {
     return new OrderCreatedDomainEvent({
-      id: order.id.value,
+      aggregateId: order.id.value,
       description: order.description.value,
       amount: order.amount.value
     });

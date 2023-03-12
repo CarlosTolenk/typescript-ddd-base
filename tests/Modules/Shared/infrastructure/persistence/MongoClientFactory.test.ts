@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-import { MongoClientFactory } from '../../../../../../src/Modules/Shared/infrastructure/persistence/mongo/MongoClientFactory';
+import { MongoClientFactory } from '../../../../../src/Modules/Shared/infrastructure/persistence/mongo/MongoClientFactory';
 
 describe('MongoClientFactory', () => {
   const factory = MongoClientFactory;

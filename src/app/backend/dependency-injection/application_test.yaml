@@ -1,6 +1,7 @@
 imports:
   - { resource: ./application.yaml }
   - { resource: ./Orders/application.yaml }
+  - { resource: ./OrderStatistics/application.yaml }
 
 services:
   Shared.EnvironmentArranger:

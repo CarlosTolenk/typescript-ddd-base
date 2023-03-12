@@ -1,5 +1,5 @@
 import { OrderAmount } from '../../../../src/Modules/Orders/domain/value-object/OrderAmount';
-import { IntegerMother } from '../Shared/domain/IntegerMother';
+import { IntegerMother } from '../../Shared/domain/IntegerMother';
 
 export class OrderAmountMother {
   static create(value: number): OrderAmount {

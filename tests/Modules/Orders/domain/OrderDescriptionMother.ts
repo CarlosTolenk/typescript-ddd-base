@@ -1,5 +1,5 @@
 import { OrderDescription } from '../../../../src/Modules/Orders/domain/value-object/OrderDescription';
-import { WordMother } from '../Shared/domain/WordMother';
+import { WordMother } from '../../Shared/domain/WordMother';
 
 export class OrderDescriptionMother {
   static create(value: string): OrderDescription {

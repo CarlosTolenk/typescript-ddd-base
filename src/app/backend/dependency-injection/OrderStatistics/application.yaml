@@ -1,0 +1,18 @@
+services:
+  Modules.OrderStatistics.domain.OrderStatisticsRepository:
+    class: ../../../../Modules/OrderStatistics/infrastructure/persistence/MongoOrderStatisticRepository
+    arguments: ['@Shared.ConnectionManager']
+
+  Modules.OrderStatistics.application.OrderStatisticIncrementer:
+    class: ../../../../Modules/OrderStatistics/application/Increment/OrderStatisticIncrementer
+    arguments: ['@Modules.OrderStatistics.domain.OrderStatisticsRepository', '@Shared.domain.EventBus']
+
+  Modules.OrderStatistics.application.OrderCounterOnOrderCreated:
+    class: ../../../../Modules/OrderStatistics/application/Increment/OrderCounterOnOrderCreated
+    arguments: ['@Modules.OrderStatistics.application.OrderStatisticIncrementer']
+    tags:
+      - { name: 'domainEventSubscriber' }
+
+  Modules.OrderStatistics.application.OrderStatisticFinder:
+    class: ../../../../Modules/OrderStatistics/application/Find/OrderStatisticFinder
+    arguments: ['@Modules.OrderStatistics.domain.OrderStatisticsRepository']
