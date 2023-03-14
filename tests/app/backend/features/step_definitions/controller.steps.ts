@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { AfterAll, BeforeAll, Given, Then } from 'cucumber';
+import { AfterAll, BeforeAll, Given, Then, Before } from 'cucumber';
 import request from 'supertest';
 
 import { BackendApp } from '../../../../../src/app/backend/BackendApp';
@@ -29,12 +29,20 @@ Then('the response should be empty', () => {
   assert.deepStrictEqual(_response.body, {});
 });
 
+Then('the response content should be:', response => {
+  assert.deepStrictEqual(_response.body, JSON.parse(response));
+});
+
 BeforeAll(async () => {
   environmentArranger = await container.get<Promise<EnvironmentArranger>>('Shared.EnvironmentArranger');
   await environmentArranger.arrange();
 
   application = new BackendApp();
   await application.start();
+});
+
+Before(async () => {
+  await environmentArranger.arrange();
 });
 
 AfterAll(async () => {

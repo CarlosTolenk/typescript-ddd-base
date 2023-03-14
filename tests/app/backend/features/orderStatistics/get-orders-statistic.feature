@@ -8,11 +8,11 @@ Feature: Obtain the total number of orders
     """
     {
       "data": {
-        "id": "c77fa036-cbc7-4414-996b-c6a7a93cae09",
+        "id": "a246f68b-6451-455f-b029-db5ea0e63a1c",
         "type": "order.created",
         "occurred_on": "2023-03-08T08:37:32+00:00",
+        "aggregateId": "01867b99-93ec-42ba-86a6-7f305e972aa6",
         "attributes": {
-          "id": "8c900b20-e04a-4777-9183-32faab6d2fb5",
           "amount": 450,
           "description": "new order"
         },
@@ -30,3 +30,4 @@ Feature: Obtain the total number of orders
       "total": 1,
       "totalAmount": 450
     }
+    """
