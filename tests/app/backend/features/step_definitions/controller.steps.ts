@@ -3,10 +3,13 @@ import { AfterAll, BeforeAll, Given, Then } from 'cucumber';
 import request from 'supertest';
 
 import { BackendApp } from '../../../../../src/app/backend/BackendApp';
+import { EnvironmentArranger } from '../../../../Modules/Shared/infrastructure/arranger/EnvironmentArranger';
+import container from '../../../../../src/app/backend/dependency-injection';
 
 let _request: request.Test;
 let application: BackendApp;
 let _response: request.Response;
+let environmentArranger: EnvironmentArranger;
 
 Given('I send a GET request to {string}', (route: string) => {
   _request = request(application.httpServer).get(route);
@@ -27,10 +30,15 @@ Then('the response should be empty', () => {
 });
 
 BeforeAll(async () => {
+  environmentArranger = await container.get<Promise<EnvironmentArranger>>('Shared.EnvironmentArranger');
+  await environmentArranger.arrange();
+
   application = new BackendApp();
   await application.start();
 });
 
 AfterAll(async () => {
+  await environmentArranger.close();
+
   await application.stop();
 });

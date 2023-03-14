@@ -1,7 +1,7 @@
 import { OrderCreator } from '../../../../src/Modules/Orders/application/OrderCreator';
 import { OrderAmountNotZero } from '../../../../src/Modules/Orders/domain/exceptions/OrderAmountNotZero';
 import { OrderDescriptionLengthExceeded } from '../../../../src/Modules/Orders/domain/exceptions/OrderDescriptionLengthExceeded';
-import EventBusMock from '../__mocks__/EventBusMock';
+import EventBusMock from '../../Shared/__mocks__/EventBusMock';
 // Mocks
 import { OrderRepositoryMock } from '../__mocks__/OrderRepositoryMock';
 import { OrderCreatedDomainEventMother } from '../domain/OrderCreatedDomainEventMother';
