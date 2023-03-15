@@ -1,6 +1,6 @@
 import { DomainEvent } from '../../Shared/domain/DomainEvent';
 
-type CoursesCounterIncrementedAttributes = { total: number; totalAmount: number };
+type CoursesCounterIncrementedAttributes = { id: string; total: number; totalAmount: number };
 
 export class OrderStatisticIncrementedDomainEvent extends DomainEvent {
   static readonly EVENT_NAME = 'courses_counter.incremented';
@@ -14,8 +14,9 @@ export class OrderStatisticIncrementedDomainEvent extends DomainEvent {
     this.totalAmount = data.totalAmount;
   }
 
-  toPrimitives() {
+  toPrimitives(): CoursesCounterIncrementedAttributes {
     return {
+      id: this.aggregateId,
       total: this.total,
       totalAmount: this.totalAmount
     };
