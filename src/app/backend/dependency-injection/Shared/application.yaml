@@ -10,6 +10,19 @@ services:
       method: 'createClient'
     arguments: ['app', '@Shared.MongoConfig']
 
+  Shared.RabbitMQConfig:
+    factory:
+      class: ../../../../Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMQConfigFactory
+      method: 'createConfig'
+
   Shared.domain.EventBus:
     class: ../../../../Modules/Shared/infrastructure/eventBus/inMemory/InMemoryAsyncEventBus
     arguments: []
+
+  Shared.RabbitMQQueueFormatter:
+    class: ../../../../Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMQqueueFormatter
+    arguments: ['app']
+
+  Shared.RabbitMQConnection:
+    class: ../../../../Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMqConnection
+    arguments: ['@Shared.RabbitMQConfig']

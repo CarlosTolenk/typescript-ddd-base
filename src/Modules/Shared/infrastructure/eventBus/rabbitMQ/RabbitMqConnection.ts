@@ -3,7 +3,7 @@ import amqplib from 'amqplib';
 import { ConnectionSettings } from './ConnectionSettings';
 import { ExchangeSetting } from './ExchangeSetting';
 
-export class RabbitMQConnection {
+export class RabbitMqConnection {
   protected connectionSettings: ConnectionSettings;
 
   protected channel?: amqplib.ConfirmChannel;
@@ -44,6 +44,29 @@ export class RabbitMQConnection {
     await channel.prefetch(1);
 
     return channel;
+  }
+
+  async exchange(params: { name: string }): Promise<any> {
+    return this.channel?.assertExchange(params.name, 'topic', { durable: true });
+  }
+
+  async queue(params: { exchange: string; name: string; routingKeys: string[] }) {
+    const durable = true;
+    const exclusive = false;
+    const autoDelete = false;
+
+    await this.channel?.assertQueue(params.name, {
+      exclusive,
+      durable,
+      autoDelete
+    });
+    for (const routingKey of params.routingKeys) {
+      await this.channel!.bindQueue(params.name, params.exchange, routingKey);
+    }
+  }
+
+  async deleteQueue(queue: string) {
+    return await this.channel!.deleteQueue(queue);
   }
 
   async publish(params: {

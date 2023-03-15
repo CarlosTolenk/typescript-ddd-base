@@ -1,18 +1,18 @@
 import { DomainEvent } from '../../../domain/DomainEvent';
 import { EventBus } from '../../../domain/EventBus';
 import { DomainEventSubscribers } from '../DomainEventSubscribers';
-import { RabbitMQConnection } from './RabbitMqConnection';
+import { RabbitMqConnection } from './RabbitMqConnection';
 import { DomainEventFailoverPublisher } from '../DomainEventFailoverPublisher';
 import { DomainEventJsonSerializer } from '../DomainEventJsonSerializer';
 
 export class RabbitMQEventBus implements EventBus {
   private failoverPublisher: DomainEventFailoverPublisher;
-  private readonly connection: RabbitMQConnection;
+  private readonly connection: RabbitMqConnection;
   private readonly exchange: string;
 
   constructor(params: {
     failoverPublisher: DomainEventFailoverPublisher;
-    connection: RabbitMQConnection;
+    connection: RabbitMqConnection;
     exchange: string;
   }) {
     const { failoverPublisher, connection, exchange } = params;
@@ -21,7 +21,6 @@ export class RabbitMQEventBus implements EventBus {
     this.exchange = exchange;
   }
 
-  // @ts-ignore
   addSubscribers(subscribers: DomainEventSubscribers): void {
     throw new Error('Method not implemented.');
   }

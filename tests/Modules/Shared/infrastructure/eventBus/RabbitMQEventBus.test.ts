@@ -1,4 +1,4 @@
-import { RabbitMQConnection } from '../../../../../src/Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMqConnection';
+import { RabbitMqConnection } from '../../../../../src/Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMqConnection';
 import { RabbitMQEventBus } from '../../../../../src/Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMQEventBus';
 import { OrderCreatedDomainEventMother } from '../../../Orders/domain/OrderCreatedDomainEventMother';
 
@@ -17,10 +17,10 @@ describe('RabbitMQEventBus test', () => {
     exchangeSettings: { name: '' }
   };
 
-  let connection: RabbitMQConnection;
+  let connection: RabbitMqConnection;
 
   beforeAll(async () => {
-    connection = new RabbitMQConnection(config);
+    connection = new RabbitMqConnection(config);
     await connection.connect();
   });
 
