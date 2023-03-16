@@ -25,8 +25,6 @@ describe('DomainEventFailoverPublisher test', () => {
     const eventBus = new DomainEventFailoverPublisher(mongoClient, deserializer);
     const event = DomainEventDummyMother.random();
 
-    console.log(event);
-
     await eventBus.publish(event);
 
     expect(await eventBus.consume()).toEqual([event]);
