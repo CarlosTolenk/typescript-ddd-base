@@ -3,37 +3,39 @@ import { OrderStatistics } from '../../../../src/Modules/OrderStatistics/domain/
 import { Nullable } from '../../../../src/Modules/Shared/domain/Nullable';
 
 export class OrderStatisticRepositoryMock implements OrderStatisticRepository {
-  private mockSave = jest.fn();
-  private mockSearch = jest.fn();
-  private orderStatistic: Nullable<OrderStatistics> = null;
+	private readonly mockSave = jest.fn();
+	private readonly mockSearch = jest.fn();
+	private orderStatistic: Nullable<OrderStatistics> = null;
 
-  async save(orderStatistic: OrderStatistics): Promise<void> {
-    this.mockSave(orderStatistic);
-  }
+	async save(orderStatistic: OrderStatistics): Promise<void> {
+		this.mockSave(orderStatistic);
+	}
 
-  async search(): Promise<Nullable<OrderStatistics>> {
-    this.mockSearch();
-    return this.orderStatistic;
-  }
+	async search(): Promise<Nullable<OrderStatistics>> {
+		this.mockSearch();
 
-  returnOnSearch(statistics: OrderStatistics) {
-    this.orderStatistic = statistics;
-  }
-  assertSearch() {
-    expect(this.mockSearch).toHaveBeenCalled();
-  }
+		return this.orderStatistic;
+	}
 
-  assertNotSave() {
-    expect(this.mockSave).toHaveBeenCalledTimes(0);
-  }
+	returnOnSearch(statistics: OrderStatistics) {
+		this.orderStatistic = statistics;
+	}
 
-  assertLastOrderStatisticSaved(orderStatistic: OrderStatistics) {
-    const mock = this.mockSave.mock;
-    const lastOrderStatistic = mock.calls[mock.calls.length - 1][0] as OrderStatistics;
-    const { id: id1, ...statisticPrimitives } = orderStatistic.toPrimitives();
-    const { id: id2, ...lastSavedPrimitives } = lastOrderStatistic.toPrimitives();
+	assertSearch() {
+		expect(this.mockSearch).toHaveBeenCalled();
+	}
 
-    expect(lastOrderStatistic).toBeInstanceOf(OrderStatistics);
-    expect(lastSavedPrimitives).toEqual(statisticPrimitives);
-  }
+	assertNotSave() {
+		expect(this.mockSave).toHaveBeenCalledTimes(0);
+	}
+
+	assertLastOrderStatisticSaved(orderStatistic: OrderStatistics) {
+		const mock = this.mockSave.mock;
+		const lastOrderStatistic = mock.calls[mock.calls.length - 1][0] as OrderStatistics;
+		const { id: id1, ...statisticPrimitives } = orderStatistic.toPrimitives();
+		const { id: id2, ...lastSavedPrimitives } = lastOrderStatistic.toPrimitives();
+
+		expect(lastOrderStatistic).toBeInstanceOf(OrderStatistics);
+		expect(lastSavedPrimitives).toEqual(statisticPrimitives);
+	}
 }

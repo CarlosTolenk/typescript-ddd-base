@@ -2,35 +2,41 @@ import { DomainEvent } from '../../../../src/Modules/Shared/domain/DomainEvent';
 import { UuidMother } from '../domain/UuidMother';
 
 export class DomainEventDummy extends DomainEvent {
-  static readonly EVENT_NAME = 'dummy';
+	static readonly EVENT_NAME = 'dummy';
 
-  constructor(data: { aggregateId: string; eventId?: string; occurredOn?: Date }) {
-    const { aggregateId, eventId, occurredOn } = data;
-    super({ eventName: DomainEventDummy.EVENT_NAME, aggregateId, eventId, occurredOn });
-  }
+	constructor(data: { aggregateId: string; eventId?: string; occurredOn?: Date }) {
+		const { aggregateId, eventId, occurredOn } = data;
+		super({ eventName: DomainEventDummy.EVENT_NAME, aggregateId, eventId, occurredOn });
+	}
 
-  toPrimitives(): any {
-    return {
-      id: this.aggregateId
-    };
-  }
+	toPrimitives(): any {
+		return {
+			id: this.aggregateId
+		};
+	}
 
-  static fromPrimitives(params: { aggregateId: string; attributes: {}; eventId: string; occurredOn: Date }) {
-    const { aggregateId, eventId, occurredOn } = params;
-    return new DomainEventDummy({
-      aggregateId: aggregateId,
-      eventId,
-      occurredOn
-    });
-  }
+	static fromPrimitives(params: {
+		aggregateId: string;
+		attributes: {};
+		eventId: string;
+		occurredOn: Date;
+	}) {
+		const { aggregateId, eventId, occurredOn } = params;
+
+		return new DomainEventDummy({
+			aggregateId,
+			eventId,
+			occurredOn
+		});
+	}
 }
 
 export class DomainEventDummyMother {
-  static random() {
-    return new DomainEventDummy({
-      aggregateId: UuidMother.random(),
-      eventId: UuidMother.random(),
-      occurredOn: new Date()
-    });
-  }
+	static random() {
+		return new DomainEventDummy({
+			aggregateId: UuidMother.random(),
+			eventId: UuidMother.random(),
+			occurredOn: new Date()
+		});
+	}
 }

@@ -1,25 +1,25 @@
 import { Given } from 'cucumber';
-import container from '../../../../../src/app/backend/dependency-injection';
-import { EventBus } from '../../../../../src/Modules/Shared/domain/EventBus';
-import { DomainEventSubscribers } from '../../../../../src/Modules/Shared/infrastructure/eventBus/DomainEventSubscribers';
-import { DomainEventDeserializer } from '../../../../../src/Modules/Shared/infrastructure/eventBus/DomainEventDeserializer';
 
-const eventBus = container.get('Shared.domain.EventBus') as EventBus;
+import container from '../../../../../src/app/backend/dependency-injection';
+import { DomainEventDeserializer } from '../../../../../src/Modules/Shared/infrastructure/eventBus/DomainEventDeserializer';
+import { DomainEventSubscribers } from '../../../../../src/Modules/Shared/infrastructure/eventBus/DomainEventSubscribers';
+
+const eventBus = container.get('Shared.domain.EventBus');
 const deserializer = buildDeserializer();
 
 Given('I send an event to the event bus:', async (event: any) => {
-  const domainEvent = deserializer.deserialize(event);
+	const domainEvent = deserializer.deserialize(event);
 
-  await eventBus.publish([domainEvent!]);
-  await wait(200);
+	await eventBus.publish([domainEvent]);
+	await wait(200);
 });
 
 function buildDeserializer() {
-  const subscribers = DomainEventSubscribers.from(container);
+	const subscribers = DomainEventSubscribers.from(container);
 
-  return DomainEventDeserializer.configure(subscribers);
+	return DomainEventDeserializer.configure(subscribers);
 }
 
-function wait(milliseconds: number) {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
+async function wait(milliseconds: number) {
+	return new Promise(resolve => setTimeout(resolve, milliseconds));
 }

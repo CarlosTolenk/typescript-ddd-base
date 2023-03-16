@@ -1,11 +1,12 @@
 export class RabbitMQqueueFormatter {
-  constructor(private moduleName: string) {}
+	constructor(private readonly moduleName: string) {}
 
-  format(value: string) {
-    const name = value
-      .split(/(?=[A-Z])/)
-      .join('_')
-      .toLowerCase();
-    return `${this.moduleName}.${name}`;
-  }
+	format(value: string) {
+		const name = value
+			.split(/(?=[A-Z])/)
+			.join('_')
+			.toLowerCase();
+
+		return `${this.moduleName}.${name}`;
+	}
 }

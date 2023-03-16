@@ -8,19 +8,23 @@ import { OrderDescriptionMother } from './OrderDescriptionMother';
 import { OrderIdMother } from './OrderIdMother';
 
 export class OrderMother {
-  static create(id: OrderId, amount: OrderAmount, description: OrderDescription): Order {
-    return new Order({ id, amount, description });
-  }
+	static create(id: OrderId, amount: OrderAmount, description: OrderDescription): Order {
+		return new Order({ id, amount, description });
+	}
 
-  static fromRequest(request: CreateOrderRequest): Order {
-    return this.create(
-      OrderIdMother.create(request.id),
-      OrderAmountMother.create(request.amount),
-      OrderDescriptionMother.create(request.description)
-    );
-  }
+	static fromRequest(request: CreateOrderRequest): Order {
+		return this.create(
+			OrderIdMother.create(request.id),
+			OrderAmountMother.create(request.amount),
+			OrderDescriptionMother.create(request.description)
+		);
+	}
 
-  static random(): Order {
-    return this.create(OrderIdMother.random(), OrderAmountMother.random(), OrderDescriptionMother.random());
-  }
+	static random(): Order {
+		return this.create(
+			OrderIdMother.random(),
+			OrderAmountMother.random(),
+			OrderDescriptionMother.random()
+		);
+	}
 }

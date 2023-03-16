@@ -7,27 +7,35 @@ import { OrderDescriptionMother } from '../domain/OrderDescriptionMother';
 import { OrderIdMother } from '../domain/OrderIdMother';
 
 export class CreateOrderRequestMother {
-  static create(id: OrderId, amount: OrderAmount, description: OrderDescription): CreateOrderRequest {
-    return { id: id.value, amount: amount.value, description: description.value };
-  }
+	static create(
+		id: OrderId,
+		amount: OrderAmount,
+		description: OrderDescription
+	): CreateOrderRequest {
+		return { id: id.value, amount: amount.value, description: description.value };
+	}
 
-  static random(): CreateOrderRequest {
-    return this.create(OrderIdMother.random(), OrderAmountMother.random(), OrderDescriptionMother.random());
-  }
+	static random(): CreateOrderRequest {
+		return this.create(
+			OrderIdMother.random(),
+			OrderAmountMother.random(),
+			OrderDescriptionMother.random()
+		);
+	}
 
-  static invalidAmountRequest(): CreateOrderRequest {
-    return {
-      id: OrderIdMother.random().value,
-      amount: OrderAmountMother.invalidAmount(),
-      description: OrderDescriptionMother.random().value
-    };
-  }
+	static invalidAmountRequest(): CreateOrderRequest {
+		return {
+			id: OrderIdMother.random().value,
+			amount: OrderAmountMother.invalidAmount(),
+			description: OrderDescriptionMother.random().value
+		};
+	}
 
-  static invalidDescriptionRequest(): CreateOrderRequest {
-    return {
-      id: OrderIdMother.random().value,
-      amount: OrderAmountMother.random().value,
-      description: OrderDescriptionMother.invalidDescription()
-    };
-  }
+	static invalidDescriptionRequest(): CreateOrderRequest {
+		return {
+			id: OrderIdMother.random().value,
+			amount: OrderAmountMother.random().value,
+			description: OrderDescriptionMother.invalidDescription()
+		};
+	}
 }
