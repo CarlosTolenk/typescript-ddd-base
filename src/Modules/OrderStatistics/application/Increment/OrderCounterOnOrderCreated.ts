@@ -17,6 +17,9 @@ export class OrderCounterOnOrderCreated implements DomainEventSubscriber<OrderCr
   }
 
   async on(domainEvent: OrderCreatedDomainEvent): Promise<void> {
-    await this.incrementer.run(new OrderId(domainEvent.aggregateId), domainEvent.amount);
+    await this.incrementer.run({
+      orderId: new OrderId(domainEvent.aggregateId),
+      amount: domainEvent.amount
+    });
   }
 }

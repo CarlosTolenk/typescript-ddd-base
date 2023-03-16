@@ -2,12 +2,13 @@ import { EventBus } from '../../Shared/domain/EventBus';
 import { Order } from '../domain/Order';
 import { OrderRepository } from '../domain/OrderRepository';
 import { OrderAmount } from '../domain/value-object/OrderAmount';
+import { UseCase } from '../../Shared/domain/UseCase';
 // Value Object
 import { OrderDescription } from '../domain/value-object/OrderDescription';
 import { OrderId } from '../domain/value-object/OrderId';
 import { CreateOrderRequest } from './CreateOrderRequest';
 
-export class OrderCreator {
+export class OrderCreator implements UseCase<CreateOrderRequest, void> {
   private readonly repository: OrderRepository;
   private readonly eventBus: EventBus;
 

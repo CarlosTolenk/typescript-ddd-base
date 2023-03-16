@@ -1,7 +1,13 @@
 import { OrderStatisticNotExist } from '../../domain/exception/OrderStatisticNotExist';
 import { OrderStatisticRepository } from '../../domain/OrderStatisticRepository';
+import { UseCase } from '../../../Shared/domain/UseCase';
 
-export class OrderStatisticFinder {
+interface ResponseOrderStatisticFinder {
+  total: number;
+  totalAmount: number;
+}
+
+export class OrderStatisticFinder implements UseCase<any, ResponseOrderStatisticFinder> {
   private readonly repository: OrderStatisticRepository;
   constructor(repository: OrderStatisticRepository) {
     this.repository = repository;

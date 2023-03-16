@@ -3,8 +3,14 @@ import { EventBus } from '../../../Shared/domain/EventBus';
 import { OrderStatisticRepository } from '../../domain/OrderStatisticRepository';
 import { OrderStatistics } from '../../domain/OrderStatistics';
 import { OrderStatisticsId } from '../../domain/value-object/OrderStatisticsId';
+import { UseCase } from '../../../Shared/domain/UseCase';
 
-export class OrderStatisticIncrementer {
+interface OrderStatisticIncrementerRequest {
+  orderId: OrderId;
+  amount: number;
+}
+
+export class OrderStatisticIncrementer implements UseCase<OrderStatisticIncrementerRequest, void> {
   private readonly repository: OrderStatisticRepository;
   private readonly eventBus: EventBus;
   constructor(repository: OrderStatisticRepository, eventBus: EventBus) {
@@ -12,7 +18,7 @@ export class OrderStatisticIncrementer {
     this.eventBus = eventBus;
   }
 
-  async run(orderId: OrderId, amount: number) {
+  async run({ orderId, amount }: OrderStatisticIncrementerRequest): Promise<void> {
     const statistic = (await this.repository.search()) || this.initializeCounter();
 
     statistic.increment(orderId, amount);
