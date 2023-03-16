@@ -8,18 +8,18 @@ const eventBus = container.get('Shared.domain.EventBus');
 const deserializer = buildDeserializer();
 
 Given('I send an event to the event bus:', async (event: any) => {
-	const domainEvent = deserializer.deserialize(event);
+  const domainEvent = deserializer.deserialize(event);
 
-	await eventBus.publish([domainEvent]);
-	await wait(200);
+  await eventBus.publish([domainEvent]);
+  await wait(200);
 });
 
 function buildDeserializer() {
-	const subscribers = DomainEventSubscribers.from(container);
+  const subscribers = DomainEventSubscribers.from(container);
 
-	return DomainEventDeserializer.configure(subscribers);
+  return DomainEventDeserializer.configure(subscribers);
 }
 
 async function wait(milliseconds: number) {
-	return new Promise(resolve => setTimeout(resolve, milliseconds));
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
 }

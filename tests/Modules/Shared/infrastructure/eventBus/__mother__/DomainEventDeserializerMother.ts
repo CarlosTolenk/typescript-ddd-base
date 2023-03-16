@@ -3,10 +3,10 @@ import { DomainEventSubscribers } from '../../../../../../src/Modules/Shared/inf
 import { DomainEventSubscriberDummy } from '../../../__mocks__/DomainEventSubscriberDummy';
 
 export class DomainEventDeserializerMother {
-	static create() {
-		const dummySubscriber = new DomainEventSubscriberDummy();
-		const subscribers = new DomainEventSubscribers([dummySubscriber]);
+  static create() {
+    const dummySubscriber = new DomainEventSubscriberDummy();
+    const subscribers = new DomainEventSubscribers([dummySubscriber]);
 
-		return DomainEventDeserializer.configure(subscribers);
-	}
+    return DomainEventDeserializer.configure(subscribers);
+  }
 }

@@ -5,18 +5,18 @@ import { DomainEventSubscriber } from '../../../Shared/domain/DomainEventSubscri
 import { OrderStatisticIncrementer } from './OrderStatisticIncrementer';
 
 export class OrderCounterOnOrderCreated implements DomainEventSubscriber<OrderCreatedDomainEvent> {
-	// @ts-ignore
-	private readonly incrementer: OrderStatisticIncrementer;
+  // @ts-ignore
+  private readonly incrementer: OrderStatisticIncrementer;
 
-	constructor(incrementer: OrderStatisticIncrementer) {
-		this.incrementer = incrementer;
-	}
+  constructor(incrementer: OrderStatisticIncrementer) {
+    this.incrementer = incrementer;
+  }
 
-	subscribedTo(): Array<DomainEventClass> {
-		return [OrderCreatedDomainEvent];
-	}
+  subscribedTo(): Array<DomainEventClass> {
+    return [OrderCreatedDomainEvent];
+  }
 
-	async on(domainEvent: OrderCreatedDomainEvent): Promise<void> {
-		await this.incrementer.run(new OrderId(domainEvent.aggregateId), domainEvent.amount);
-	}
+  async on(domainEvent: OrderCreatedDomainEvent): Promise<void> {
+    await this.incrementer.run(new OrderId(domainEvent.aggregateId), domainEvent.amount);
+  }
 }

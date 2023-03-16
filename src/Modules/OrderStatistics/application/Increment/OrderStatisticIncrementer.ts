@@ -5,23 +5,23 @@ import { OrderStatistics } from '../../domain/OrderStatistics';
 import { OrderStatisticsId } from '../../domain/value-object/OrderStatisticsId';
 
 export class OrderStatisticIncrementer {
-	private readonly repository: OrderStatisticRepository;
-	private readonly eventBus: EventBus;
-	constructor(repository: OrderStatisticRepository, eventBus: EventBus) {
-		this.repository = repository;
-		this.eventBus = eventBus;
-	}
+  private readonly repository: OrderStatisticRepository;
+  private readonly eventBus: EventBus;
+  constructor(repository: OrderStatisticRepository, eventBus: EventBus) {
+    this.repository = repository;
+    this.eventBus = eventBus;
+  }
 
-	async run(orderId: OrderId, amount: number) {
-		const statistic = (await this.repository.search()) || this.initializeCounter();
+  async run(orderId: OrderId, amount: number) {
+    const statistic = (await this.repository.search()) || this.initializeCounter();
 
-		statistic.increment(orderId, amount);
+    statistic.increment(orderId, amount);
 
-		await this.repository.save(statistic);
-		await this.eventBus.publish(statistic.pullDomainEvents());
-	}
+    await this.repository.save(statistic);
+    await this.eventBus.publish(statistic.pullDomainEvents());
+  }
 
-	private initializeCounter(): OrderStatistics {
-		return OrderStatistics.initialize(OrderStatisticsId.random());
-	}
+  private initializeCounter(): OrderStatistics {
+    return OrderStatistics.initialize(OrderStatisticsId.random());
+  }
 }

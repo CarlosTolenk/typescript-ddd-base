@@ -4,13 +4,13 @@ import { DomainEventDeserializerMother } from './DomainEventDeserializerMother';
 import { RabbitMQMongoClientMother } from './RabbitMQMongoClientMother';
 
 export class DomainEventFailoverPublisherMother {
-	static create() {
-		const mongoClient = RabbitMQMongoClientMother.create();
+  static create() {
+    const mongoClient = RabbitMQMongoClientMother.create();
 
-		return new DomainEventFailoverPublisher(mongoClient, DomainEventDeserializerMother.create());
-	}
+    return new DomainEventFailoverPublisher(mongoClient, DomainEventDeserializerMother.create());
+  }
 
-	static failOverDouble() {
-		return new DomainEventFailoverPublisherDouble();
-	}
+  static failOverDouble() {
+    return new DomainEventFailoverPublisherDouble();
+  }
 }

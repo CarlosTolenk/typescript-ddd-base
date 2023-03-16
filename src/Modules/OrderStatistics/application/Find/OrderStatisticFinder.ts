@@ -2,20 +2,17 @@ import { OrderStatisticNotExist } from '../../domain/exception/OrderStatisticNot
 import { OrderStatisticRepository } from '../../domain/OrderStatisticRepository';
 
 export class OrderStatisticFinder {
-	private readonly repository: OrderStatisticRepository;
-	constructor(repository: OrderStatisticRepository) {
-		this.repository = repository;
-	}
+  private readonly repository: OrderStatisticRepository;
+  constructor(repository: OrderStatisticRepository) {
+    this.repository = repository;
+  }
 
-	async run() {
-		const counter = await this.repository.search();
-		if (!counter) {
-			throw new OrderStatisticNotExist(
-				'There are no statistics for this order',
-				this.constructor.name
-			);
-		}
+  async run() {
+    const counter = await this.repository.search();
+    if (!counter) {
+      throw new OrderStatisticNotExist('There are no statistics for this order', this.constructor.name);
+    }
 
-		return { total: counter.total.value, totalAmount: counter.totalAmount.value };
-	}
+    return { total: counter.total.value, totalAmount: counter.totalAmount.value };
+  }
 }

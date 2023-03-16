@@ -4,17 +4,17 @@ import { DomainEventDeserializerMother } from '../infrastructure/eventBus/__moth
 import { RabbitMQMongoClientMother } from '../infrastructure/eventBus/__mother__/RabbitMQMongoClientMother';
 
 export class DomainEventFailoverPublisherDouble extends DomainEventFailoverPublisher {
-	private readonly publishMock: jest.Mock;
-	constructor() {
-		super(RabbitMQMongoClientMother.create(), DomainEventDeserializerMother.create());
-		this.publishMock = jest.fn();
-	}
+  private readonly publishMock: jest.Mock;
+  constructor() {
+    super(RabbitMQMongoClientMother.create(), DomainEventDeserializerMother.create());
+    this.publishMock = jest.fn();
+  }
 
-	async publish(event: DomainEvent): Promise<void> {
-		this.publishMock(event);
-	}
+  async publish(event: DomainEvent): Promise<void> {
+    this.publishMock(event);
+  }
 
-	assertEventHasBeenPublished(event: DomainEvent) {
-		expect(this.publishMock).toHaveBeenCalledWith(event);
-	}
+  assertEventHasBeenPublished(event: DomainEvent) {
+    expect(this.publishMock).toHaveBeenCalledWith(event);
+  }
 }

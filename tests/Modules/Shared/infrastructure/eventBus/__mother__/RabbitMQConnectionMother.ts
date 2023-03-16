@@ -3,15 +3,15 @@ import { RabbitMQConnectionDouble } from '../../../__mocks__/RabbitMQConnectionD
 import { RabbitMQConnectionConfigurationMother } from './RabbitMQConnectionConfigurationMother';
 
 export class RabbitMQConnectionMother {
-	static async create() {
-		const config = RabbitMQConnectionConfigurationMother.create();
-		const connection = new RabbitMqConnection(config);
-		await connection.connect();
+  static async create() {
+    const config = RabbitMQConnectionConfigurationMother.create();
+    const connection = new RabbitMqConnection(config);
+    await connection.connect();
 
-		return connection;
-	}
+    return connection;
+  }
 
-	static failOnPublish() {
-		return new RabbitMQConnectionDouble(RabbitMQConnectionConfigurationMother.create());
-	}
+  static failOnPublish() {
+    return new RabbitMQConnectionDouble(RabbitMQConnectionConfigurationMother.create());
+  }
 }

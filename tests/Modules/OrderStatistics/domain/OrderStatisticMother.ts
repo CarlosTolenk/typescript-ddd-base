@@ -9,24 +9,24 @@ import { OrderStatisticsAmountMother } from './OrderStatisticsAmountMother';
 import { OrderStatisticsTotalMother } from './OrderStatisticsTotalMother';
 
 export class OrderStatisticMother {
-	static random(): OrderStatistics {
-		const total = OrderStatisticsTotalMother.random();
-		const totalAmount = OrderStatisticsAmountMother.random();
+  static random(): OrderStatistics {
+    const total = OrderStatisticsTotalMother.random();
+    const totalAmount = OrderStatisticsAmountMother.random();
 
-		return new OrderStatistics(
-			OrderStatisticsId.random(),
-			total,
-			totalAmount,
-			Repeater.random(OrderIdMother.random.bind(OrderIdMother), total.value)
-		);
-	}
+    return new OrderStatistics(
+      OrderStatisticsId.random(),
+      total,
+      totalAmount,
+      Repeater.random(OrderIdMother.random.bind(OrderIdMother), total.value)
+    );
+  }
 
-	static withOne(orderId: OrderId): OrderStatistics {
-		return new OrderStatistics(
-			OrderStatisticsId.random(),
-			new OrderStatisticsTotal(1),
-			new OrderStatisticsAmount(100),
-			[orderId]
-		);
-	}
+  static withOne(orderId: OrderId): OrderStatistics {
+    return new OrderStatistics(
+      OrderStatisticsId.random(),
+      new OrderStatisticsTotal(1),
+      new OrderStatisticsAmount(100),
+      [orderId]
+    );
+  }
 }
