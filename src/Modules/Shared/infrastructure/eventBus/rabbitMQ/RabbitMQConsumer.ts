@@ -4,17 +4,44 @@ import { DomainEventDeserializer } from '../DomainEventDeserializer';
 import { ConsumeMessage } from 'amqplib';
 
 export class RabbitMQConsumer {
-  constructor(private subscriber: DomainEventSubscriber<DomainEvent>, private deserializer: DomainEventDeserializer) { }
+  private subscriber: DomainEventSubscriber<DomainEvent>;
+  private deserializer: DomainEventDeserializer;
+  private readonly maxRetries: Number;
 
-  async onMessage(params: { message: ConsumeMessage; ack: Function; noAck: Function; }) {
-    const content = params.message.content.toString();
+  constructor(params: {
+    subscriber: DomainEventSubscriber<DomainEvent>;
+    deserializer: DomainEventDeserializer;
+    maxRetries: Number;
+  }) {
+    this.subscriber = params.subscriber;
+    this.deserializer = params.deserializer;
+    this.maxRetries = params.maxRetries;
+  }
+
+  async onMessage(params: { message: ConsumeMessage; ack: Function; retry: Function; deadLetter: Function }) {
+    const { message, ack, retry, deadLetter } = params;
+    const content = message.content.toString();
     const domainEvent = this.deserializer.deserialize(content);
 
     try {
       await this.subscriber.on(domainEvent);
-      params.ack();
     } catch (error) {
-      params.noAck();
+      this.hasBeenRedeliveredTooMuch(message) ? deadLetter() : retry();
+    } finally {
+      ack();
     }
+  }
+
+  private hasBeenRedeliveredTooMuch(message: ConsumeMessage) {
+    if (this.hasBeenRedelivered(message)) {
+      const count = parseInt(message.properties.headers['redelivery_count']);
+      return count >= this.maxRetries;
+    }
+
+    return false;
+  }
+
+  private hasBeenRedelivered(message: ConsumeMessage) {
+    return message.properties.headers['redelivery_count'] !== undefined;
   }
 }
