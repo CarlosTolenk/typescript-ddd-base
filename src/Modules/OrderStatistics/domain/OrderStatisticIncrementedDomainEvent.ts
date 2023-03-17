@@ -3,7 +3,7 @@ import { DomainEvent } from '../../Shared/domain/DomainEvent';
 type CoursesCounterIncrementedAttributes = { id: string; total: number; totalAmount: number };
 
 export class OrderStatisticIncrementedDomainEvent extends DomainEvent {
-  static readonly EVENT_NAME = 'courses_counter.incremented';
+  static readonly EVENT_NAME = 'order_counter.incremented';
   readonly total: number;
   readonly totalAmount: number;
 
