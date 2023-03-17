@@ -1,7 +1,8 @@
-import amqplib from 'amqplib';
+import amqplib, { ConsumeMessage } from 'amqplib';
 
 import { ConnectionSettings } from './ConnectionSettings';
 import { ExchangeSetting } from './ExchangeSetting';
+import { RabbitMQConsumer } from './RabbitMQConsumer';
 
 export class RabbitMqConnection {
   protected connectionSettings: ConnectionSettings;
@@ -82,6 +83,30 @@ export class RabbitMqConnection {
         error ? reject(error) : resolve()
       );
     });
+  }
+
+  async consume(queue: string, consumer: RabbitMQConsumer) {
+    await this.channel!.consume(queue, (message: ConsumeMessage | null) => {
+      if (!message) {
+        return;
+      }
+
+      const ack = this.getAck(message);
+      const noAck = this.getNoAck(message);
+      consumer.onMessage({ message, ack, noAck });
+    });
+  }
+
+  private getAck(message: ConsumeMessage) {
+    return () => {
+      this.channel!.ack(message);
+    };
+  }
+
+  private getNoAck(message: ConsumeMessage) {
+    return () => {
+      this.channel!.nack(message);
+    };
   }
 
   async close(): Promise<void> {

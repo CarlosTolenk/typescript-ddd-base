@@ -4,7 +4,7 @@ import { DomainEventSubscribers } from './DomainEventSubscribers';
 type DomainEventJSON = {
   type: string;
   aggregateId: string;
-  attributes: string;
+  attributes: any;
   id: string;
   occurred_on: string;
 };
@@ -26,18 +26,18 @@ export class DomainEventDeserializer extends Map<string, DomainEventClass> {
 
   deserialize(event: string) {
     const eventData = JSON.parse(event).data as DomainEventJSON;
-    const { type, aggregateId, attributes, id, occurred_on } = eventData;
-    const eventClass = super.get(type);
+    const eventName = eventData.type;
+    const eventClass = super.get(eventName);
 
     if (!eventClass) {
-      throw Error(`DomainEvent mapping not found for event ${type}`);
+      throw Error(`DomainEvent mapping not found for event ${eventName}`);
     }
 
     return eventClass.fromPrimitives({
-      aggregateId,
-      attributes,
-      occurredOn: new Date(occurred_on),
-      eventId: id
+      aggregateId: eventData.aggregateId,
+      attributes: eventData.attributes,
+      occurredOn: new Date(eventData.occurred_on),
+      eventId: eventData.id
     });
   }
 }
