@@ -4,7 +4,7 @@ import httpStatus from 'http-status';
 import { OrderCreator } from '../../../../Modules/Orders/application/OrderCreator';
 import { Controller } from '../Controller';
 
-type OrderPutRequest = Request & {
+type OrderPostRequest = Request & {
   body: {
     id: string;
     amount: number;
@@ -12,14 +12,14 @@ type OrderPutRequest = Request & {
   };
 };
 
-export class OrderPutController implements Controller {
+export class OrderPostController implements Controller {
   private readonly orderCreator: OrderCreator;
 
   constructor(orderCreator: OrderCreator) {
     this.orderCreator = orderCreator;
   }
 
-  async run(req: OrderPutRequest, res: Response): Promise<void> {
+  async run(req: OrderPostRequest, res: Response): Promise<void> {
     try {
       const { id, amount, description } = req.body;
       await this.orderCreator.run({ id, amount, description });

@@ -4,7 +4,7 @@ Feature: Create a new order
   I want to create a new order
 
   Scenario: A valid non existing order
-    Given I send a PUT request to "/order/ef8ac118-8d7f-49cc-abec-78e0d05af80a" with body:
+    Given I send a POST request to "/order" with body:
     """
     {
       "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",

@@ -7,8 +7,8 @@ services:
     class: ../../controllers/health/StatusReadinessController
     arguments: []
 
-  App.controllers.order.OrderPutController:
-    class: ../../controllers/order/OrderPutController
+  App.controllers.order.OrderPostController:
+    class: ../../controllers/order/OrderPostController
     arguments: ['@Modules.Orders.application.OrderCreator']
 
   App.controllers.orderStatistic.OrderStatisticGetController:
