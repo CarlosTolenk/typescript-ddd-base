@@ -13,7 +13,7 @@ export class RabbitMQEventBus implements EventBus {
   private readonly connection: RabbitMqConnection;
   private readonly exchange: string;
   private queueNameFormatter: RabbitMQqueueFormatter;
-  private maxRetries: Number;
+  private readonly maxRetries: Number;
 
   constructor(params: {
     failoverPublisher: DomainEventFailoverPublisher;
@@ -32,6 +32,7 @@ export class RabbitMQEventBus implements EventBus {
 
   async addSubscribers(subscribers: DomainEventSubscribers): Promise<void> {
     const deserializer = DomainEventDeserializer.configure(subscribers);
+    this.failoverPublisher.setDeserializer(deserializer);
     const maxRetries = this.maxRetries;
 
     for (const subscriber of subscribers.items) {

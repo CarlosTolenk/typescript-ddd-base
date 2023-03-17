@@ -4,25 +4,37 @@ services:
       class: ../../../../Modules/Shared/infrastructure/persistence/mongo/MongoConfigFactory
       method: 'createConfig'
 
-  Shared.ConnectionManager:
-    factory:
-      class: ../../../../Modules/Shared/infrastructure/persistence/mongo/MongoClientFactory
-      method: 'createClient'
-    arguments: ['app', '@Shared.MongoConfig']
-
   Shared.RabbitMQConfig:
     factory:
       class: ../../../../Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMQConfigFactory
       method: 'createConfig'
 
   Shared.domain.EventBus:
-    class: ../../../../Modules/Shared/infrastructure/eventBus/inMemory/InMemoryAsyncEventBus
-    arguments: []
+    factory:
+      class: ../../../../Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMQEventBusFactory
+      method: 'create'
+    arguments:
+      [
+        '@Shared.DomainEventFailoverPublisher',
+        '@Shared.RabbitMQConnection',
+        '@Shared.RabbitMQqueueFormatter',
+        '@Shared.RabbitMQConfig'
+      ]
 
-  Shared.RabbitMQQueueFormatter:
+  Shared.ConnectionManager:
+    factory:
+      class: ../../../../Modules/Shared/infrastructure/persistence/mongo/MongoClientFactory
+      method: 'createClient'
+    arguments: ['app', '@Shared.MongoConfig']
+
+  Shared.RabbitMQqueueFormatter:
     class: ../../../../Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMQqueueFormatter
     arguments: ['app']
 
   Shared.RabbitMQConnection:
     class: ../../../../Modules/Shared/infrastructure/eventBus/rabbitMQ/RabbitMqConnection
     arguments: ['@Shared.RabbitMQConfig']
+
+  Shared.DomainEventFailoverPublisher:
+    class: ../../../../Modules/Shared/infrastructure/eventBus/DomainEventFailoverPublisher
+    arguments: ['@Shared.ConnectionManager']
